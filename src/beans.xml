@@ -43,7 +43,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.repair.bean.Admin</value>
+				<value>com.repair.bean.User</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

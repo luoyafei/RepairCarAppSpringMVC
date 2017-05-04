@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.JsonObject;
-import com.repair.bean.Admin;
-import com.repair.dao.AdminDao;
+import com.repair.bean.User;
+import com.repair.dao.UserDao;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminLoginController {
+@RequestMapping("/user")
+public class UserLoginController {
 
-	private AdminDao ad;
-	@Resource(name="adminDao")
-	private void setAd(AdminDao ad) {
-		this.ad = ad;
+	private UserDao ud;
+	@Resource(name="userDao")
+	private void setAd(UserDao ud) {
+		this.ud = ud;
 	}
 	
-	@RequestMapping(value="/adminLogin", method=RequestMethod.POST)
-	public void adminLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam(value="name") String name, @RequestParam(value="password") String password) {
+	@RequestMapping(value="/userLogin", method=RequestMethod.POST)
+	public void userLogin(HttpServletRequest request, HttpServletResponse response,@RequestParam(value="type") String type, @RequestParam(value="name") String name, @RequestParam(value="password") String password) {
 		
 		response.setContentType("application/json");
         response.setHeader("Pragma", "No-cache");
@@ -41,12 +41,12 @@ public class AdminLoginController {
 			out = response.getWriter();
 		} catch(IOException e) {}
 
-		if(name != null && name.trim().hashCode() != 0 && password != null && password.trim().hashCode() != 0) {
-			Admin a = ad.getAdminByName(name);
-			if(a != null) {
-				if(a.getAdminPwd().equals(password)) {
+		if(type != null && name != null && name.trim().hashCode() != 0 && password != null && password.trim().hashCode() != 0) {
+			User u = ud.getUserByName(name, type);
+			if(u != null) {
+				if(u.getUserPwd().equals(password)) {
 					success = true;
-					request.getSession().setAttribute("admin", a);
+					request.getSession().setAttribute("user", u);
 				} else
 					reason = "密码错误";
 			} else
@@ -76,8 +76,8 @@ public class AdminLoginController {
 		try {
 			out = response.getWriter();
 		} catch(IOException e) {}
-		Admin admin = (Admin) request.getSession().getAttribute("admin");
-		if(admin != null) {
+		User user = (User) request.getSession().getAttribute("user");
+		if(user != null) {
 				success = true;
 		} else
 			reason = "未登陆";

@@ -12,49 +12,49 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.repair.bean.Admin;
+import com.repair.bean.User;
 
-@Repository("adminDao")
-public class AdminDao {
+@Repository("userDao")
+public class UserDao {
 	private HibernateTemplate hibernateTemplate;
 	@Resource(name = "hibernateTemplate")
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 	/**
-	 * 创建Admin账号
-	 * @param admin
+	 * 创建用户账号
+	 * @param user
 	 * @return
 	 */
-	public boolean saveAdmin(Admin admin) {
+	public boolean saveUser(User user) {
 		try {
-			hibernateTemplate.save(admin);
+			hibernateTemplate.save(user);
 			return true;
 		} catch(DataAccessException e) {
 			return false;
 		}
 	}
 	/**
-	 * 更新Admin账号
-	 * @param admin
+	 * 更新user账号
+	 * @param user
 	 * @return
 	 */
-	public boolean updateAdmin(Admin admin) {
+	public boolean updateUser(User user) {
 		try {
-			hibernateTemplate.save(admin);
+			hibernateTemplate.save(user);
 			return true;
 		} catch(DataAccessException e) {
 			return false;
 		}
 	}
 	/**
-	 * 删除Admin账户
-	 * @param admin
+	 * 删除use账户
+	 * @param user
 	 * @return
 	 */
-	public boolean deleteAdmin(Admin admin) {
+	public boolean deleteUser(User user) {
 		try {
-			hibernateTemplate.delete(admin);
+			hibernateTemplate.delete(user);
 			return true;
 		} catch(DataAccessException e) {
 			return false;
@@ -62,26 +62,27 @@ public class AdminDao {
 	}
 	
 	/**
-	 * 通过Id获取Admin账户
-	 * @param adminId
+	 * 通过Id获取User账户
+	 * @param userId
 	 * @return
 	 */
-	public Admin getAdminById(String adminId) {
-		return hibernateTemplate.get(Admin.class, adminId);
+	public User getUserById(String userId) {
+		return hibernateTemplate.get(User.class, userId);
 	}
 	/**
-	 * 通过Admin账户名称获取整个Admin信息
-	 * @param adminName
+	 * 通过User账户名称获取整个user信息
+	 * @param userName
+	 * @param userType
 	 * @return
 	 */
-	public Admin getAdminByName(final String adminName) {
+	public User getUserByName(final String userName, final String userType) {
 		try {
-			return hibernateTemplate.execute(new HibernateCallback<Admin>() {
+			return hibernateTemplate.execute(new HibernateCallback<User>() {
 				@Override
-				public Admin doInHibernate(Session session) throws HibernateException, SQLException {
-					String hql = "from Admin a where a.adminName = :adminName";
+				public User doInHibernate(Session session) throws HibernateException, SQLException {
+					String hql = "from User u where u.userName = :userName and u.userType = :userType";
 					@SuppressWarnings("unchecked")
-					List<Admin> as = session.createQuery(hql).setString("adminName", adminName).list();
+					List<User> as = session.createQuery(hql).setString("userName", userName).setString("userType", userType).list();
 					if(as != null && as.size() == 1)
 						return as.get(0);
 					else
