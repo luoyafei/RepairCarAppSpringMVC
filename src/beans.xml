@@ -44,6 +44,12 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.repair.bean.User</value>
+				<value>com.repair.bean.RepairOrder</value>
+				<value>com.repair.bean.FeedBack</value>
+				<value>com.repair.bean.OrderLog</value>
+				<value>com.repair.bean.DeviceStroe</value>
+				<value>com.repair.bean.ReceiveLog</value>
+				<value>com.repair.bean.HasDevice</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
