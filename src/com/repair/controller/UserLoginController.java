@@ -46,14 +46,15 @@ public class UserLoginController {
 			if(u != null) {
 				if(u.getUserPwd().equals(password)) {
 					success = true;
-					request.getSession().setAttribute("user", u);
+					//request.getSession().setAttribute("user", u);
+					jo.addProperty("userId", u.getUserId());
 				} else
 					reason = "密码错误";
 			} else
 				reason = "该用户不存在";
 		} else
 			reason = "请将信息填写完整";
-		
+
 		jo.addProperty("success", success);
 		jo.addProperty("reason", reason);
 		
