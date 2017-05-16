@@ -21,6 +21,7 @@ public class ReceiveLog {
 	private String indexId;
 	private String deviceId;//	设备ID
 	private String operateType;//操作类型(0：入库，1：领取，2：退回，3：报废）
+	private String applyId;//申请人id
 	private String personId;//责任人id
 	private Timestamp handleTime;//操作时间
 	private String remark;//备注
@@ -63,5 +64,11 @@ public class ReceiveLog {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public String getApplyId() {
+		return applyId;
+	}
+	public void setApplyId(String applyId) {
+		this.applyId = applyId;
 	}
 }

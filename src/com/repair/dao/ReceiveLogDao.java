@@ -17,7 +17,7 @@ public class ReceiveLogDao {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 	
-	public boolean saveFeedBack(ReceiveLog rl) {
+	public boolean saveReceiveLog(ReceiveLog rl) {
 		try {
 			hibernateTemplate.save(rl);
 			return true;

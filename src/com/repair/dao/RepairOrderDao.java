@@ -41,7 +41,7 @@ public class RepairOrderDao {
 	}
 	public boolean updateRepairOrder(RepairOrder ro) {
 		try {
-			hibernateTemplate.save(ro);
+			hibernateTemplate.update(ro);
 			return true;
 		} catch(DataAccessException e) {
 			return false;

@@ -88,6 +88,71 @@ public class OrderController {
         out.close();
 	}
 	
+	
+	@RequestMapping(value="/suspendOrder", method=RequestMethod.POST)
+	public void suspendOrder(HttpServletResponse response, @RequestParam(value="orderId") String orderId, @RequestParam(value="suspendReason") String suspendReason) {
+		response.setContentType("application/json");
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        
+        PrintWriter out= null;
+        try {
+			out = response.getWriter();
+		} catch (IOException e) {}
+        
+        boolean success = true;
+        String reason = "";
+        
+        RepairOrder order = rod.getRepairOrderById(orderId);
+        order.setOrderState("3");//将状态设置为挂起
+        order.setSuspendReason(suspendReason);
+        if(rod.updateRepairOrder(order)) {
+        	success = true;
+        } else
+        	reason = "更新失败";
+        
+        JsonObject jo = new JsonObject();
+        jo.addProperty("success", success);
+        jo.addProperty("reason", reason);
+        
+        out.print(jo.toString());
+        out.flush();
+        out.close();
+	}
+	
+	@RequestMapping(value="/okOrder2", method=RequestMethod.POST)
+	public void okOrder2(HttpServletResponse response, @RequestParam(value="orderId") String orderId) {
+		response.setContentType("application/json");
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        
+        PrintWriter out= null;
+        try {
+			out = response.getWriter();
+		} catch (IOException e) {}
+        
+        boolean success = true;
+        String reason = "";
+        
+        RepairOrder order = rod.getRepairOrderById(orderId);
+        order.setOrderState("2");//将状态设置为挂起
+        
+        if(rod.updateRepairOrder(order)) {
+        	success = true;
+        } else
+        	reason = "更新失败";
+        
+        JsonObject jo = new JsonObject();
+        jo.addProperty("success", success);
+        jo.addProperty("reason", reason);
+        
+        out.print(jo.toString());
+        out.flush();
+        out.close();
+	}
+	
 	/**
 	 * 上传日志
 	 * @param response

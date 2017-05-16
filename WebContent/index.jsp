@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<img alt="" src="img.png" />
 <form action="admin/adminLogin" method="post">
 	<input type="text" name="name" />
 	<input type="password" name="password" />

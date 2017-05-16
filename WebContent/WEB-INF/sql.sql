@@ -86,6 +86,7 @@ create table t_receiveLog (
 	indexId varchar(32) primary key,
 	deviceId varchar(32) not null,
 	operateType varchar(1),
+	applyId varchar(32),
 	personId varchar(32),
 	handleTime datetime default now(),
 	remark varchar(255)

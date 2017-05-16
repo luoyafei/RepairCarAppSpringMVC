@@ -23,13 +23,17 @@ public class DeviceStroeDao {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 	
-	public boolean saveFeedBack(DeviceStroe ds) {
+	public boolean saveDeviceStroe(DeviceStroe ds) {
 		try {
 			hibernateTemplate.save(ds);
 			return true;
 		} catch(DataAccessException e) {
 			return false;
 		}
+	}
+	
+	public DeviceStroe getDeviceStroe(String id) {
+		return hibernateTemplate.get(DeviceStroe.class, id);
 	}
 	
 	public List<DeviceStroe> getAllDevices() {
@@ -47,4 +51,5 @@ public class DeviceStroeDao {
 			return null;
 		}
 	}
+	
 }

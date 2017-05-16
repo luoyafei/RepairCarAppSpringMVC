@@ -20,7 +20,7 @@ public class DeviceStroe {
 	
 	private String deviceId;
 	private String deviceNum;//设备型号
-	private String deviceType;//设备类型 0有线，1无线
+	private String deviceType;//设备类型  0有线，1无线
 	private String deviceState;//状态(0：入库，1：出库，2：使用，3：报废）
 	private String personId;//责任人
 	private Timestamp inputTime;//入库时间
