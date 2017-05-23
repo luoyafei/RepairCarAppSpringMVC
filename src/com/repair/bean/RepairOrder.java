@@ -20,7 +20,7 @@ public class RepairOrder {
 	private Timestamp orderTime;//预约时间
 	private String orderAddr;//预约地点
 	private String orderState;//订单状态（0：新单，1：上级公司确认，2：派单确认，3：挂起，4：正在处理，5：成功处理；6提交结算；7结算完成8订单撤销
-	private String orderType;//单据类型；0：安装单；1：拆除单；2：维修单3:加装单
+	private String orderType;//单据类型；0：维修单；1：保养；2：拆除单；3:加装单
 	private String orderRemark;//备注
 	private String suspendReason;//挂起原因
 	private String suspendRemark;//挂起备注
@@ -71,13 +71,15 @@ public class RepairOrder {
 		this.orderAddr = orderAddr;
 	}
 	public String getOrderState() {
-		return orderState;
+		return this.orderState;
+		//（0：新单，1：上级公司确认，2：派单确认，3：挂起，4：正在处理，5：成功处理；6提交结算；7结算完成8订单撤销
 	}
 	public void setOrderState(String orderState) {
 		this.orderState = orderState;
 	}
 	public String getOrderType() {
-		return orderType;
+		return this.orderType;
+		//单据类型；0：维修单；1：保养；2：拆除单；3:加装单
 	}
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;

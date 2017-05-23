@@ -56,6 +56,11 @@ public class OrderController {
 
         List<RepairOrder> listR = rod.getRepairOrders(0, 10, userId, "0", "0");
         
+        for(RepairOrder ro : listR) {
+        	ro.setOrderState(cOrderS(ro.getOrderState()));
+        	ro.setOrderType(cOrderT(ro.getOrderType()));
+        }
+        
         Gson gson = new Gson();
         JsonObject jo = new JsonObject();
         jo.addProperty("listR", gson.toJson(listR));
@@ -63,6 +68,45 @@ public class OrderController {
         out.print(jo.toString());
         out.flush();
         out.close();
+	}
+	
+	private String cOrderS(String orderState) {
+		switch (orderState) {
+			case "0":
+				return "新单";
+			case "1":
+				return "上级公司确认";
+			case "2":
+				return "派单确认";
+			case "3":
+				return "挂起";
+			case "4":
+				return "正在处理";
+			case "5":
+				return "成功处理";
+			case "6":
+				return "提交结算";
+			case "7":
+				return "结算完成";
+			case "8":
+				return "订单撤销";
+			default:
+				return "订单状态异常";
+		}
+	}
+	private String cOrderT(String orderType) {
+		switch (orderType) {
+			case "0":
+				return "维修单";
+			case "1":
+				return "保养单";
+			case "2":
+				return "拆除单";
+			case "3":
+				return "加装单";
+			default:
+				return "单据类型异常";
+		}
 	}
 	
 	@RequestMapping(value="/getOrder", method=RequestMethod.POST)
@@ -78,6 +122,10 @@ public class OrderController {
 		} catch (IOException e) {}
         
         RepairOrder order = rod.getRepairOrderById(orderId);
+        
+        order.setOrderState(cOrderS(order.getOrderState()));
+        order.setOrderType(cOrderT(order.getOrderType()));
+        
         
         Gson gson = new Gson();
         JsonObject jo = new JsonObject();

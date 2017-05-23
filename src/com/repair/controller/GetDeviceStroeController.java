@@ -67,6 +67,10 @@ public class GetDeviceStroeController {
 
         List<DeviceStroe> dss = dsd.getAllDevices();
         
+        for(DeviceStroe ds : dss) {
+        	ds.setDeviceType(cDeviceT(ds.getDeviceType()));
+        }
+        
         Gson gson = new Gson();
         JsonObject jo = new JsonObject();
         jo.addProperty("dss", gson.toJson(dss));
@@ -74,6 +78,16 @@ public class GetDeviceStroeController {
         out.print(jo.toString());
         out.flush();
         out.close();
+	}
+	private String cDeviceT(String deviceType) {
+		switch (deviceType) {
+		case "0":
+			return "有线";
+		case "1":
+			return "无线";
+		default:
+			return "类型出错";
+		}
 	}
 	
 	/**
@@ -152,6 +166,10 @@ public class GetDeviceStroeController {
         		for(int i = 0; i < hds.size(); i++) {
         			dss.add(dsd.getDeviceStroe(hds.get(i).getDeviceId()));
         		}
+        		
+        		for(DeviceStroe ds : dss) {
+                	ds.setDeviceType(cDeviceT(ds.getDeviceType()));
+                }
         		
         		jo.addProperty("dss", gson.toJson(dss));
         	}
