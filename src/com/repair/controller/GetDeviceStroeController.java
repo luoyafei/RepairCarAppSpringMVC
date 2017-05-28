@@ -145,7 +145,7 @@ public class GetDeviceStroeController {
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");
 
-        PrintWriter out= null;
+        PrintWriter out = null;
         try {
 			out = response.getWriter();
 		} catch (IOException e) {}

@@ -22,7 +22,8 @@ public class FileUploadUtil {
             tempFile.createNewFile();  
         }  
         file.transferTo(tempFile);  
-        return "/file/download?fileName=" + tempFile.getName();  
+        //return "/file/download?fileName=" + tempFile.getName();
+        return tempFile.getName();
     }  
   
     public static File getFile(String fileName) {  

@@ -91,4 +91,16 @@ create table t_receiveLog (
 	handleTime datetime default now(),
 	remark varchar(255)
 )engine=innoDB default charset=utf8;
-	
+
+/**
+ * 在线保养表
+ */
+create table t_online (
+	indexId varchar(32) primary key,
+	userId varchar(32),
+	onlineContent varchar(255),
+	carPictrue varchar(255),
+	createDate datetime default now(),
+	remark varchar(255)
+)engine=innoDB default charset=utf8;
+

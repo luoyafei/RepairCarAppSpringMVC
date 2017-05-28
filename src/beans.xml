@@ -50,6 +50,7 @@
 				<value>com.repair.bean.DeviceStroe</value>
 				<value>com.repair.bean.ReceiveLog</value>
 				<value>com.repair.bean.HasDevice</value>
+				<value>com.repair.bean.ToOnline</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
